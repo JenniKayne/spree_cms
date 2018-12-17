@@ -8,7 +8,7 @@ module SpreeCms
       asset = Spree::CmsImage.where(id: image_definition[:id]).first
       return image_definition[:url] if asset.blank?
 
-      asset.attachment.url(size)
+      asset.url(size)
     end
 
     def options_for_cms_blocks_group_select(selected_value = nil)

@@ -21,7 +21,7 @@ module Spree
                       convert_options: { all: '-strip -colorspace sRGB' },
                       processors: %i[thumbnail paperclip_optimizer]
     validates_attachment :attachment, presence: true, content_type: {
-      content_type: %w[image/jpeg image/jpg image/png image/gif]
+      content_type: %w[image/jpeg image/jpg image/png image/gif image/svg+xml]
     }
     after_post_process :find_dimensions
 
@@ -36,6 +36,7 @@ module Spree
     end
 
     def url(size)
+      size = :original if attachment_content_type == 'image/svg+xml'
       attachment.url(size, false)
     end
 
